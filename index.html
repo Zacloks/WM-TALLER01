@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/favicon_temp.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <script type="module" src="js/fondo.js"></script>
     <script type="module" src="js/planeta.js"></script>
@@ -29,7 +29,10 @@
     </div>
 
     <header class="header">
-        <a href="#inicio" class="header__logo">APSIS</a>
+        <a href="#inicio" class="header__logo">
+            <img src="assets/logo.svg" alt="" width="32" height="32">
+            APSIS
+        </a>
 
         <button class="header__menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
             Menú
@@ -227,7 +230,7 @@
             <div class="pase-escena revelar" id="pase-escena">
                 <div class="pase" id="pase" aria-live="polite">
                     <div class="pase__cabecera">
-                        <span>APSIS</span>
+                        <span class="pase__marca"><img src="assets/logo.svg" alt="" width="22" height="22">APSIS</span>
                         <span>Pase de abordaje</span>
                     </div>
                     <dl class="pase__cuerpo">

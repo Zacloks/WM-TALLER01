@@ -139,9 +139,20 @@ em {
 }
 
 .header__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-weight: 700;
     font-size: 1.25rem;
     letter-spacing: 0.05em;
+}
+
+.header__logo img {
+    transition: transform 0.8s var(--curva);
+}
+
+.header__logo:hover img {
+    transform: rotate(-10deg) scale(1.1);
 }
 
 .header__nav ul {
@@ -461,6 +472,12 @@ body.listo .hero__pie {
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
+}
+
+.pase__marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .pase__cuerpo {
