@@ -104,11 +104,6 @@ em {
     justify-content: flex-end;
     padding: var(--margen);
     background: var(--bg);
-    transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1);
-}
-
-.loader.oculto {
-    transform: translateY(-100%);
 }
 
 .loader__texto {
@@ -204,16 +199,6 @@ em {
 
 .hero__titulo .letra {
     display: inline-block;
-    transform: translateY(110%);
-}
-
-body.listo .hero__titulo .letra {
-    animation: subir 1.1s var(--curva) forwards;
-    animation-delay: calc(var(--i) * 90ms);
-}
-
-@keyframes subir {
-    to { transform: translateY(0); }
 }
 
 .hero__pie {
@@ -222,12 +207,6 @@ body.listo .hero__titulo .letra {
     align-items: flex-end;
     gap: 1rem;
     margin-top: 1rem;
-    opacity: 0;
-    transition: opacity 1s 0.6s;
-}
-
-body.listo .hero__pie {
-    opacity: 1;
 }
 
 .hero__eslogan {
@@ -358,14 +337,25 @@ body.listo .hero__pie {
 }
 
 .nave__imagen {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     aspect-ratio: 4 / 3;
-    border: 1px dashed var(--linea);
-    border-radius: 1.5rem;
-    color: var(--tenue);
-    text-align: center;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
     will-change: transform;
+}
+
+.nave__imagen.arrastrando {
+    cursor: grabbing;
+}
+
+.nave__imagen figcaption {
+    color: var(--tenue);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
 .nave__caracteristicas {

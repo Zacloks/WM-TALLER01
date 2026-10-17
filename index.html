@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
-    <script type="module" src="js/fondo.js"></script>
-    <script type="module" src="js/planeta.js"></script>
-    <script type="module" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+    <script src="js/fondo.js" defer></script>
+    <script src="js/planeta.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body class="cargando">
 
@@ -178,12 +179,12 @@
             </article>
         </section>
 
-        <section class="nave" id="nave" data-forma="nebulosa" data-opacidad="0.35">
+        <section class="nave" id="nave" data-forma="nave" data-ancla=".nave__imagen">
             <h2 class="nave__titulo revelar">La nave<br><em>APSIS I</em></h2>
 
             <div class="nave__visual">
                 <figure class="nave__imagen" data-parallax="0.15">
-                    <figcaption>Imagen de la nave<br><small>assets/img/nave.webp</small></figcaption>
+                    <figcaption>APSIS I · Arrastra para girarla</figcaption>
                 </figure>
             </div>
 
