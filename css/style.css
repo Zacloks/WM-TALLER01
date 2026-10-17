@@ -95,6 +95,20 @@ em {
     transform: none;
 }
 
+.solo-tactil {
+    display: none;
+}
+
+@media (hover: none) {
+    .solo-puntero {
+        display: none;
+    }
+
+    .solo-tactil {
+        display: inline;
+    }
+}
+
 .loader {
     position: fixed;
     inset: 0;
@@ -435,6 +449,7 @@ em {
 
 .pase-escena {
     perspective: 1000px;
+    touch-action: pan-y;
 }
 
 .pase {
@@ -559,10 +574,6 @@ em {
     .header__nav a:not(.boton-pill) {
         font-size: 2rem;
         color: var(--texto);
-    }
-
-    .hero__ayuda {
-        display: none;
     }
 
     .hero__pie {

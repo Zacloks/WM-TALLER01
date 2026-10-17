@@ -89,8 +89,11 @@
     const escena = document.getElementById("pase-escena");
     const pase = document.getElementById("pase");
     const INCLINACION_MAX = 15;
+    let esperaEnderezar;
 
-    escena.addEventListener("pointermove", (e) => {
+    function inclinarPase(e) {
+        clearTimeout(esperaEnderezar);
+
         const rect = escena.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -99,11 +102,19 @@
         pase.style.setProperty("--rx", `${-y * INCLINACION_MAX * 2}deg`);
         pase.style.setProperty("--gx", `${(x + 0.5) * 100}%`);
         pase.style.setProperty("--gy", `${(y + 0.5) * 100}%`);
-    });
+    }
 
-    escena.addEventListener("pointerleave", () => {
+    function enderezarPase() {
         pase.style.setProperty("--rx", "0deg");
         pase.style.setProperty("--ry", "0deg");
+        pase.style.setProperty("--gx", "50%");
+        pase.style.setProperty("--gy", "50%");
+    }
+
+    escena.addEventListener("pointerdown", inclinarPase);
+    escena.addEventListener("pointermove", inclinarPase);
+    escena.addEventListener("pointerleave", (e) => {
+        esperaEnderezar = setTimeout(enderezarPase, e.pointerType === "touch" ? 600 : 0);
     });
 
     const form = document.getElementById("form-reserva");
