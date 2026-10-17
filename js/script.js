@@ -146,6 +146,8 @@
         pase.classList.remove("emitido");
         void pase.offsetWidth;
         pase.classList.add("emitido");
+        
+        mostrarToast("Pase de abordaje emitido con éxito");
     });
 
     // 1. Evitar que se seleccionen fechas del pasado en el formulario
@@ -160,7 +162,6 @@
     const botonSubir = document.getElementById("boton-subir");
     if (botonSubir) {
         window.addEventListener("scroll", () => {
-            // El botón aparece cuando el usuario baja el equivalente a una pantalla
             if (window.scrollY > window.innerHeight) {
                 botonSubir.classList.add("visible");
             } else {
@@ -168,5 +169,43 @@
             }
         }, { passive: true });
     }
+
+    // 3. Sistema de Notificaciones (Toast)
+    function mostrarToast(mensaje) {
+        const container = document.getElementById("toast-container");
+        if (!container) return;
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg> 
+            ${mensaje}
+        `;
+        
+        container.appendChild(toast);
+
+        void toast.offsetWidth;
+        toast.classList.add("visible");
+
+        setTimeout(() => {
+            toast.classList.remove("visible");
+            setTimeout(() => toast.remove(), 400);
+        }, 3500);
+    }
+
+    // 4. Efecto de Brillo Magnético en tarjetas de planetas
+    const tarjetasPlanetas = document.querySelectorAll(".planeta__contenido");
+    tarjetasPlanetas.forEach(tarjeta => {
+        tarjeta.addEventListener("mousemove", (e) => {
+            const rect = tarjeta.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            tarjeta.style.setProperty("--mouse-x", `${x}px`);
+            tarjeta.style.setProperty("--mouse-y", `${y}px`);
+        });
+    });
 
 })();
