@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +16,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
@@ -25,6 +29,7 @@
     <script src="js/planeta.js" defer></script>
     <script src="js/script.js" defer></script>
 </head>
+
 <body class="cargando">
 
     <canvas id="fondo" aria-hidden="true"></canvas>
@@ -42,7 +47,8 @@
             APSIS
         </a>
 
-        <button class="header__menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <button class="header__menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="nav">
             Menú
         </button>
 
@@ -60,7 +66,7 @@
 
         <section class="hero" id="inicio" data-forma="nebulosa">
             <p class="hero__ayuda">
-                <span class="solo-puntero">Mueve el cursor · Haz clic para un salto warp</span>
+                <span class="solo-puntero">Haz clic para un salto warp</span>
                 <span class="solo-tactil">Toca la pantalla para un salto warp</span>
             </p>
             <h1 class="hero__titulo">APSIS</h1>
@@ -77,114 +83,220 @@
                 <p class="viaje__texto revelar">Salimos desde la Tierra y nos alejamos del Sol, planeta por planeta.</p>
             </div>
 
-            <article class="planeta" id="mercurio"
-                     data-forma="planeta" data-color="#b8b0a8" data-tamano="0.55">
+            <article class="planeta" id="mercurio" data-forma="planeta" data-color="#b8b0a8" data-tamano="0.55">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">01</span>
                     <h3 class="planeta__nombre">Mercurio</h3>
-                    <p class="planeta__descripcion">Para quienes no le temen al Sol. Aquí un día dura meses y, desde algunos lugares, el Sol sale dos veces.</p>
+                    <p class="planeta__descripcion">Para quienes no le temen al Sol. Aquí un día dura meses y, desde
+                        algunos lugares, el Sol sale dos veces.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>3,7 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>167 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>57,9 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>52 días</dd></div>
-                        <div><dt>Precio</dt><dd>USD 180.000</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>3,7 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>167 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>57,9 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>52 días</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 180.000</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
 
-            <article class="planeta" id="venus"
-                     data-forma="planeta" data-color="#e8c27a" data-tamano="0.75">
+            <article class="planeta" id="venus" data-forma="planeta" data-color="#e8c27a" data-tamano="0.75">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">02</span>
                     <h3 class="planeta__nombre">Venus</h3>
-                    <p class="planeta__descripcion">Nubes ácidas, presión aplastante y un detalle único: aquí el Sol sale por el oeste. Solo para viajeros de alta resistencia.</p>
+                    <p class="planeta__descripcion">Nubes ácidas, presión aplastante y un detalle único: aquí el Sol
+                        sale por el oeste. Solo para viajeros de alta resistencia.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>8,87 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>464 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>108,2 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>38 días</dd></div>
-                        <div><dt>Precio</dt><dd>USD 140.000</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>8,87 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>464 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>108,2 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>38 días</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 140.000</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
 
-            <article class="planeta" id="marte"
-                     data-forma="planeta" data-color="#d0532c" data-tamano="0.65">
+            <article class="planeta" id="marte" data-forma="planeta" data-color="#d0532c" data-tamano="0.65">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">03</span>
                     <h3 class="planeta__nombre">Marte</h3>
-                    <p class="planeta__descripcion">El clásico. Volcanes gigantes, cañones infinitos y algo que no esperas: los atardeceres son azules.</p>
+                    <p class="planeta__descripcion">El clásico. Volcanes gigantes, cañones infinitos y algo que no
+                        esperas: los atardeceres son azules.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>3,72 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>−65 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>227,9 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>64 días</dd></div>
-                        <div><dt>Precio</dt><dd>USD 220.000</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>3,72 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>−65 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>227,9 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>64 días</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 220.000</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
 
-            <article class="planeta" id="jupiter"
-                     data-forma="planeta" data-color="#d9a066" data-tamano="1">
+            <article class="planeta" id="jupiter" data-forma="planeta" data-color="#d9a066" data-tamano="1">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">04</span>
                     <h3 class="planeta__nombre">Júpiter</h3>
-                    <p class="planeta__descripcion">Observa desde órbita una tormenta más grande que la Tierra que lleva siglos girando.</p>
+                    <p class="planeta__descripcion">Observa desde órbita una tormenta más grande que la Tierra que lleva
+                        siglos girando.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>24,79 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>−110 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>778,5 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>7 meses</dd></div>
-                        <div><dt>Precio</dt><dd>USD 640.000</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>24,79 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>−110 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>778,5 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>7 meses</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 640.000</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
 
-            <article class="planeta" id="saturno"
-                     data-forma="planeta" data-color="#e3cf8f" data-tamano="0.62" data-anillos="true">
+            <article class="planeta" id="saturno" data-forma="planeta" data-color="#e3cf8f" data-tamano="0.62"
+                data-anillos="true">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">05</span>
                     <h3 class="planeta__nombre">Saturno</h3>
-                    <p class="planeta__descripcion">Anillos de hielo y roca que se extienden por más de 270.000 km, vistos desde primera fila.</p>
+                    <p class="planeta__descripcion">Anillos de hielo y roca que se extienden por más de 270.000 km,
+                        vistos desde primera fila.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>10,44 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>−140 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>1.432 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>11 meses</dd></div>
-                        <div><dt>Precio</dt><dd>USD 890.000</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>10,44 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>−140 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>1.432 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>11 meses</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 890.000</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
 
-            <article class="planeta" id="urano"
-                     data-forma="planeta" data-color="#8fd3d9" data-tamano="0.8">
+            <article class="planeta" id="urano" data-forma="planeta" data-color="#8fd3d9" data-tamano="0.8">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">06</span>
                     <h3 class="planeta__nombre">Urano</h3>
-                    <p class="planeta__descripcion">Un gigante de hielo que gira acostado. Cada una de sus estaciones dura 21 años.</p>
+                    <p class="planeta__descripcion">Un gigante de hielo que gira acostado. Cada una de sus estaciones
+                        dura 21 años.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>8,69 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>−195 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>2.867 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>1,8 años</dd></div>
-                        <div><dt>Precio</dt><dd>USD 1,4 M</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>8,69 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>−195 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>2.867 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>1,8 años</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 1,4 M</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
 
-            <article class="planeta" id="neptuno"
-                     data-forma="planeta" data-color="#4a6cf7" data-tamano="0.8">
+            <article class="planeta" id="neptuno" data-forma="planeta" data-color="#4a6cf7" data-tamano="0.8">
                 <div class="planeta__contenido revelar">
                     <span class="planeta__numero">07</span>
                     <h3 class="planeta__nombre">Neptuno</h3>
-                    <p class="planeta__descripcion">El destino más lejano. Vientos de más de 2.000 km/h y un azul profundo que no vas a olvidar.</p>
+                    <p class="planeta__descripcion">El destino más lejano. Vientos de más de 2.000 km/h y un azul
+                        profundo que no vas a olvidar.</p>
                     <dl class="planeta__datos">
-                        <div><dt>Gravedad</dt><dd>11,15 m/s²</dd></div>
-                        <div><dt>Temperatura media</dt><dd>−200 °C</dd></div>
-                        <div><dt>Distancia al Sol</dt><dd>4.515 M km</dd></div>
-                        <div><dt>Duración del viaje</dt><dd>2,6 años</dd></div>
-                        <div><dt>Precio</dt><dd>USD 2,1 M</dd></div>
+                        <div>
+                            <dt>Gravedad</dt>
+                            <dd>11,15 m/s²</dd>
+                        </div>
+                        <div>
+                            <dt>Temperatura media</dt>
+                            <dd>−200 °C</dd>
+                        </div>
+                        <div>
+                            <dt>Distancia al Sol</dt>
+                            <dd>4.515 M km</dd>
+                        </div>
+                        <div>
+                            <dt>Duración del viaje</dt>
+                            <dd>2,6 años</dd>
+                        </div>
+                        <div>
+                            <dt>Precio</dt>
+                            <dd>USD 2,1 M</dd>
+                        </div>
                     </dl>
                 </div>
             </article>
@@ -217,21 +329,24 @@
 
         <section class="faq" id="faq" data-forma="nebulosa">
             <h2 class="faq__titulo revelar">Preguntas<br><em>frecuentes</em></h2>
-            
+
             <div class="faq__lista">
                 <details class="faq__item revelar" name="faq">
                     <summary>¿Qué incluye el equipaje permitido?</summary>
-                    <p>Cada pasajero tiene derecho a un traje espacial a medida, un módulo de pertenencias de 15kg y un kit de supervivencia interplanetaria suministrado por APSIS.</p>
+                    <p>Cada pasajero tiene derecho a un traje espacial a medida, un módulo de pertenencias de 15kg y un
+                        kit de supervivencia interplanetaria suministrado por APSIS.</p>
                 </details>
-                
+
                 <details class="faq__item revelar" name="faq">
                     <summary>¿Es seguro el criosueño para viajes largos?</summary>
-                    <p>Totalmente. Nuestro sistema supervisado por IA monitorea constantemente tus signos vitales, garantizando un despertar suave y sin efectos secundarios al llegar a tu destino.</p>
+                    <p>Totalmente. Nuestro sistema supervisado por IA monitorea constantemente tus signos vitales,
+                        garantizando un despertar suave y sin efectos secundarios al llegar a tu destino.</p>
                 </details>
-                
+
                 <details class="faq__item revelar" name="faq">
                     <summary>¿Qué ocurre si hay una tormenta solar?</summary>
-                    <p>La nave APSIS I está equipada con un escudo magnético deflector. En caso de actividad solar intensa, los escudos se activan automáticamente para proteger a los pasajeros.</p>
+                    <p>La nave APSIS I está equipada con un escudo magnético deflector. En caso de actividad solar
+                        intensa, los escudos se activan automáticamente para proteger a los pasajeros.</p>
                 </details>
             </div>
         </section>
@@ -252,7 +367,7 @@
                 </select>
 
                 <label for="nombre">Nombre del pasajero</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej: Ada Lovelace" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: Diego Malebran" required>
 
                 <label for="fecha">Fecha de despegue</label>
                 <input type="date" id="fecha" name="fecha" required>
@@ -267,12 +382,30 @@
                         <span>Pase de abordaje</span>
                     </div>
                     <dl class="pase__cuerpo">
-                        <div><dt>Pasajero</dt><dd id="pase-nombre">—</dd></div>
-                        <div><dt>Vuelo</dt><dd id="pase-vuelo">—</dd></div>
-                        <div><dt>Destino</dt><dd id="pase-destino">—</dd></div>
-                        <div><dt>Despegue</dt><dd id="pase-fecha">—</dd></div>
-                        <div><dt>Puerta</dt><dd id="pase-puerta">—</dd></div>
-                        <div><dt>Asiento</dt><dd id="pase-asiento">—</dd></div>
+                        <div>
+                            <dt>Pasajero</dt>
+                            <dd id="pase-nombre">—</dd>
+                        </div>
+                        <div>
+                            <dt>Vuelo</dt>
+                            <dd id="pase-vuelo">—</dd>
+                        </div>
+                        <div>
+                            <dt>Destino</dt>
+                            <dd id="pase-destino">—</dd>
+                        </div>
+                        <div>
+                            <dt>Despegue</dt>
+                            <dd id="pase-fecha">—</dd>
+                        </div>
+                        <div>
+                            <dt>Puerta</dt>
+                            <dd id="pase-puerta">—</dd>
+                        </div>
+                        <div>
+                            <dt>Asiento</dt>
+                            <dd id="pase-asiento">—</dd>
+                        </div>
                     </dl>
                     <div class="pase__codigo" aria-hidden="true"></div>
                 </div>
@@ -295,4 +428,5 @@
     </footer>
 
 </body>
+
 </html>
