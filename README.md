@@ -4,7 +4,7 @@ Taller 1 de Introducción al Desarrollo Web/Móvil: landing page animada con HTM
 
 ## Ver en línea
 
-https://zacloks.github.io/WM-TALLER01/
+[APSIS | Viajes interplanetarios](https://zacloks.github.io/WM-TALLER01/)
 
 ## Ejecutar en local
 
@@ -25,7 +25,7 @@ También se puede servir con un servidor local, usando **una** de estas opciones
 npx http-server -c-1 -o
 ```
 
-**Con VS Code (instalar extensión live server):** abrir la carpeta, clic derecho sobre `index.html` → *Open with Live Server*.
+**Con VS Code (instalar extensión live server):** abrir la carpeta, clic derecho sobre `index.html` → _Open with Live Server_.
 
 ## Librerías
 
