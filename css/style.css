@@ -9,6 +9,21 @@
     --curva: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--linea);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--tenue);
+}
+
 *,
 *::before,
 *::after {
@@ -266,6 +281,7 @@ em {
 
 .viaje__titulo,
 .nave__titulo,
+.faq__titulo,
 .reserva__titulo {
     font-size: clamp(2.5rem, 8vw, 7rem);
     font-weight: 700;
@@ -536,6 +552,96 @@ em {
     font-size: 0.8rem;
 }
 
+/* --- FAQ --- */
+.faq {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem var(--margen);
+    align-items: start;
+    padding: 8rem var(--margen);
+}
+
+.faq__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.faq__item {
+    border-bottom: 1px solid var(--linea);
+    padding-bottom: 1rem;
+}
+
+.faq__item summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.3s;
+}
+
+.faq__item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq__item summary::after {
+    content: "+";
+    color: var(--tenue);
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: transform 0.3s var(--curva);
+}
+
+.faq__item[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq__item[open] summary {
+    color: var(--acento);
+}
+
+.faq__item p {
+    margin-top: 1rem;
+    color: var(--tenue);
+    font-size: 0.95rem;
+}
+
+/* --- Botón Subir --- */
+.boton-subir {
+    position: fixed;
+    bottom: 2rem;
+    right: var(--margen);
+    z-index: 40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--linea);
+    border-radius: 50%;
+    background: rgba(5, 5, 7, 0.7);
+    backdrop-filter: blur(6px);
+    font-size: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.4s var(--curva), transform 0.4s var(--curva), background 0.3s, color 0.3s;
+}
+
+.boton-subir.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.boton-subir:hover {
+    background: var(--texto);
+    color: var(--bg);
+}
+
 @media (max-width: 768px) {
     .header__menu-btn {
         display: block;
@@ -615,6 +721,7 @@ em {
     }
 
     .nave,
+    .faq,
     .reserva {
         grid-template-columns: 1fr;
         padding: 6rem var(--margen);

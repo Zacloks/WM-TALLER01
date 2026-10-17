@@ -147,4 +147,26 @@
         void pase.offsetWidth;
         pase.classList.add("emitido");
     });
+
+    // 1. Evitar que se seleccionen fechas del pasado en el formulario
+    const inputFecha = document.getElementById("fecha");
+    if (inputFecha) {
+        const hoy = new Date();
+        const formatoHoy = hoy.toISOString().split("T")[0]; 
+        inputFecha.setAttribute("min", formatoHoy);
+    }
+
+    // 2. Lógica para mostrar/ocultar el botón de "Volver Arriba"
+    const botonSubir = document.getElementById("boton-subir");
+    if (botonSubir) {
+        window.addEventListener("scroll", () => {
+            // El botón aparece cuando el usuario baja el equivalente a una pantalla
+            if (window.scrollY > window.innerHeight) {
+                botonSubir.classList.add("visible");
+            } else {
+                botonSubir.classList.remove("visible");
+            }
+        }, { passive: true });
+    }
+
 })();
