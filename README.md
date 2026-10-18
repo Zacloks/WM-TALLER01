@@ -2,6 +2,12 @@
 
 Taller 1 de Introducción al Desarrollo Web/Móvil: landing page animada con HTML, CSS y JavaScript.
 
+## Integrantes
+- Miguel Valenzuel
+- Gian Guzman
+- Paulo Araya
+- Roger Villarroel
+
 ## Ver en línea
 
 [APSIS | Viajes interplanetarios](https://zacloks.github.io/WM-TALLER01/)

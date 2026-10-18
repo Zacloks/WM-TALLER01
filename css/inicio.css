@@ -1,0 +1,131 @@
+.loader {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: var(--margen);
+	background: var(--bg);
+}
+
+.loader__texto {
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.loader__contador {
+	font-size: clamp(4rem, 18vw, 14rem);
+	font-weight: 700;
+	line-height: 0.9;
+	font-variant-numeric: tabular-nums;
+}
+
+.hero {
+	min-height: 100vh;
+	min-height: 100svh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 6rem var(--margen) clamp(2rem, 6vh, 4rem);
+}
+
+.hero__ayuda {
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.hero__titulo {
+	display: flex;
+	overflow: hidden;
+	font-size: clamp(5rem, 30vw, 36rem);
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: -0.04em;
+}
+
+.hero__titulo .letra {
+	display: inline-block;
+}
+
+.hero__pie {
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	align-items: end;
+	gap: 1.5rem 3rem;
+	margin-top: 1rem;
+}
+
+.hero__eslogan {
+	font-size: clamp(1.25rem, 2.6vw, 2.25rem);
+	font-weight: 300;
+	line-height: 1.1;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
+.hero__eslogan em {
+	display: block;
+	margin-top: 0.4em;
+	font-size: var(--texto-medio);
+	letter-spacing: 0.02em;
+	text-transform: none;
+}
+
+.hero__scroll {
+	font-family: var(--fuente-subtexto);
+	position: relative;
+	padding-bottom: 3.5rem;
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.hero__scroll::after {
+	content: "";
+	position: absolute;
+	right: 50%;
+	bottom: 0;
+	width: 1px;
+	height: 2.5rem;
+	background: var(--texto);
+	transform-origin: top;
+	animation: caer 2s var(--curva) infinite;
+}
+
+@keyframes caer {
+	0% {
+		transform: scaleY(0);
+		opacity: 1;
+	}
+	60% {
+		transform: scaleY(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scaleY(1);
+		opacity: 0;
+	}
+}
+
+@media (max-width: 768px) {
+	.hero__pie {
+		grid-template-columns: 1fr auto;
+	}
+
+	.hero__eslogan {
+		grid-column: 1 / -1;
+	}
+
+	.hero__pie .boton-accion__circulo {
+		width: 3.5rem;
+		height: 3.5rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero__scroll::after {
+		animation: none;
+	}
+}

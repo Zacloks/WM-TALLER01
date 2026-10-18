@@ -1,0 +1,110 @@
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 50;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.25rem var(--margen);
+	background: linear-gradient(var(--bg), transparent);
+}
+
+.header__logo {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	font-weight: 700;
+	font-size: 1.25rem;
+	letter-spacing: 0.05em;
+}
+
+.header__logo img {
+	transition: transform 0.8s var(--curva);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.header__logo:hover img {
+		transform: rotate(-10deg) scale(1.1);
+	}
+
+	.header__nav a:not(.boton-pill):hover {
+		color: var(--texto);
+	}
+}
+
+.header__nav ul {
+	display: flex;
+	gap: 0.5rem;
+	list-style: none;
+}
+
+.header__nav a:not(.boton-pill) {
+	display: inline-block;
+	padding: 0.6rem 1rem;
+	font-size: var(--texto-meta);
+	color: var(--tenue);
+	font-weight: 500;
+	transition: color 0.25s ease;
+}
+
+.header__menu-btn {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.header__menu-btn {
+		display: block;
+		position: relative;
+		z-index: 2;
+		padding: 0.5rem 1rem;
+		border: 1px solid var(--linea);
+		border-radius: 999px;
+		background: transparent;
+		color: var(--texto);
+		font: inherit;
+		font-size: var(--texto-meta);
+		transition: transform 0.16s ease-out;
+	}
+
+	.header__menu-btn:active {
+		transform: scale(0.97);
+	}
+
+	.header__nav {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(5, 5, 7, 0.95);
+		visibility: hidden;
+		clip-path: circle(0 at calc(100% - 3rem) 2.5rem);
+		transition:
+			clip-path 0.7s var(--curva),
+			visibility 0s linear 0.7s;
+	}
+
+	.header__nav.abierto {
+		visibility: visible;
+		clip-path: circle(150% at calc(100% - 3rem) 2.5rem);
+		transition:
+			clip-path 0.7s var(--curva),
+			visibility 0s;
+	}
+
+	.header__nav ul {
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.header__nav a:not(.boton-pill) {
+		font-size: var(--texto-titulo);
+		font-weight: 300;
+		letter-spacing: var(--espaciado);
+		text-transform: uppercase;
+		color: var(--texto);
+	}
+}

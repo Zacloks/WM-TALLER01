@@ -1,0 +1,281 @@
+:root {
+	--bg: #050507;
+	--texto: #f2f2f2;
+	--tenue: rgba(242, 242, 242, 0.6);
+	--linea: rgba(242, 242, 242, 0.15);
+	--acento: #ffffff;
+	--fuente: "Space Grotesk", system-ui, sans-serif;
+	--fuente-subtexto: "Oxanium", system-ui, sans-serif;
+	--superficie: #101014;
+	--texto-meta: 0.875rem;
+	--texto-base: 1rem;
+	--texto-medio: 1.25rem;
+	--texto-titulo: clamp(2rem, 5vw, 4.75rem);
+	--texto-grande: clamp(2.25rem, 6.2vw, 6rem);
+	--espaciado: 0.28em;
+	--margen: clamp(1rem, 4vw, 3rem);
+	--curva: cubic-bezier(0.2, 0.8, 0.2, 1);
+	--salida: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--linea);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--tenue);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--bg);
+	color: var(--texto);
+	font-family: var(--fuente);
+	line-height: 1.5;
+	overflow-x: hidden;
+}
+
+body.cargando {
+	overflow: hidden;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+em {
+	font-style: normal;
+	font-weight: 300;
+	color: var(--tenue);
+}
+
+#fondo,
+#planeta {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+#fondo {
+	z-index: -2;
+}
+
+#planeta {
+	z-index: -1;
+}
+
+.boton-pill {
+	display: inline-block;
+	padding: 0.7rem 1.4rem;
+	border: 1px solid var(--linea);
+	border-radius: 999px;
+	font: inherit;
+	font-size: var(--texto-meta);
+	font-weight: 500;
+	color: var(--texto);
+	background: transparent;
+	cursor: pointer;
+	transition:
+		background 0.25s ease,
+		border-color 0.25s ease,
+		color 0.25s ease,
+		transform 0.16s ease-out;
+}
+
+.boton-pill:active {
+	transform: scale(0.97);
+}
+
+.boton-pill--lleno {
+	background: var(--texto);
+	color: var(--bg);
+	border-color: var(--texto);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.boton-pill:hover {
+		border-color: var(--texto);
+	}
+
+	.boton-pill--lleno:hover {
+		background: transparent;
+		color: var(--texto);
+	}
+}
+
+.boton-accion {
+	display: inline-flex;
+	align-items: center;
+	gap: 1.25rem;
+	padding: 0;
+	border: none;
+	background: none;
+	color: var(--texto);
+	font: inherit;
+	font-size: var(--texto-base);
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.boton-accion__circulo {
+	display: grid;
+	flex-shrink: 0;
+	place-items: center;
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+	background: var(--destino, var(--texto));
+	color: var(--bg);
+	transition:
+		background 0.6s ease,
+		transform 0.16s ease-out;
+}
+
+.boton-accion__circulo svg {
+	width: 40%;
+	height: 40%;
+	transition: translate 0.3s var(--curva);
+}
+
+.boton-accion:active .boton-accion__circulo {
+	transform: scale(0.97);
+}
+
+.boton-accion:focus-visible {
+	outline: none;
+}
+
+.boton-accion:focus-visible .boton-accion__circulo {
+	outline: 2px solid var(--texto);
+	outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.boton-accion:hover .boton-accion__circulo svg {
+		translate: 3px 0;
+	}
+}
+
+.js .revelar {
+	opacity: 0;
+	transform: translateY(40px);
+	transition:
+		opacity 0.9s var(--curva),
+		transform 0.9s var(--curva);
+}
+
+.revelar.visible {
+	opacity: 1;
+	transform: none;
+}
+
+.solo-tactil {
+	display: none;
+}
+
+.titulo {
+	font-size: var(--texto-titulo);
+	font-weight: 300;
+	line-height: 1.05;
+	letter-spacing: var(--espaciado);
+	text-transform: uppercase;
+}
+
+.titulo em {
+	display: block;
+	margin-top: 1rem;
+	font-size: var(--texto-medio);
+	letter-spacing: 0.02em;
+	text-transform: none;
+}
+
+.titulo .palabra,
+.pase__destino .palabra {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.titulo .letra {
+	display: inline-block;
+}
+
+.titulo.revelar {
+	opacity: 1;
+	transform: none;
+}
+
+.titulo.revelar.visible .letra {
+	animation: aparecer-letra 0.8s var(--curva) both;
+	animation-delay: calc(var(--i) * 40ms);
+}
+
+.titulo.revelar.visible em {
+	animation: aparecer 0.7s var(--curva) both;
+	animation-delay: 0.35s;
+}
+
+.titulo.revelar:not(.visible) .letra,
+.titulo.revelar:not(.visible) em {
+	opacity: 0;
+}
+
+@keyframes aparecer-letra {
+	from {
+		opacity: 0;
+		transform: translateY(60%);
+	}
+}
+
+@keyframes aparecer {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+}
+
+@media (hover: none) {
+	.solo-puntero {
+		display: none;
+	}
+
+	.solo-tactil {
+		display: inline;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+		*::before,
+		*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+}

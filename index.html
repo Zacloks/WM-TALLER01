@@ -12,21 +12,42 @@
     <meta property="og:url" content="https://zacloks.github.io/WM-TALLER01/">
     <meta property="og:title" content="APSIS | Viajes interplanetarios">
     <meta property="og:description" content="APSIS: viajes turísticos a los planetas del sistema solar.">
-    <meta property="og:image" content="assets/og-image.jpg">
+    <meta property="og:image" content="https://zacloks.github.io/WM-TALLER01/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/destinos.css">
+    <link rel="stylesheet" href="css/ruta.css">
+    <link rel="stylesheet" href="css/nave.css">
+    <link rel="stylesheet" href="css/astronauta.css">
+    <link rel="stylesheet" href="css/reserva.css">
+    <link rel="stylesheet" href="css/componentes.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
     <script src="js/fondo.js" defer></script>
     <script src="js/planeta.js" defer></script>
+    <script src="js/astronauta.js" defer></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="js/astronauta3d.js"></script>
+    <script src="js/destinos.js" defer></script>
+    <script src="js/ruta.js" defer></script>
+    <script type="module" src="js/destinos3d.js"></script>
     <script src="js/script.js" defer></script>
 </head>
 
@@ -55,8 +76,8 @@
         <nav class="header__nav" id="nav">
             <ul>
                 <li><a href="#viaje">Destinos</a></li>
+                <li><a href="#ruta">La ruta</a></li>
                 <li><a href="#nave">La nave</a></li>
-                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#reserva" class="boton-pill boton-pill--lleno">Reservar</a></li>
             </ul>
         </nav>
@@ -64,32 +85,38 @@
 
     <main>
 
-        <section class="hero" id="inicio" data-forma="nebulosa">
+        <section class="hero" id="inicio" data-forma="sistema">
             <p class="hero__ayuda">
                 <span class="solo-puntero">Haz clic para un salto warp</span>
                 <span class="solo-tactil">Toca la pantalla para un salto warp</span>
             </p>
             <h1 class="hero__titulo">APSIS</h1>
             <div class="hero__pie">
-                <p class="hero__eslogan">Viajes turísticos<br><em>al sistema solar</em></p>
+                <p class="hero__eslogan">Viajes turísticos al sistema solar<br><em>Siete destinos · salidas cada mes · desde USD 140.000</em></p>
+                <a href="#reserva" class="boton-accion"><span class="boton-accion__circulo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>Reservar viaje</a>
                 <a href="#viaje" class="hero__scroll">Desliza para despegar</a>
             </div>
         </section>
 
         <section class="viaje" id="viaje">
 
-            <div class="viaje__intro" data-forma="nebulosa">
-                <h2 class="viaje__titulo revelar">Siete destinos.<br><em>Un solo viaje.</em></h2>
+            <div class="viaje__intro" data-forma="sistema">
+                <h2 class="titulo viaje__titulo revelar">Siete destinos.<br><em>Un solo viaje.</em></h2>
                 <p class="viaje__texto revelar">Salimos desde la Tierra y nos alejamos del Sol, planeta por planeta.</p>
             </div>
 
-            <article class="planeta" id="mercurio" data-forma="planeta" data-color="#b8b0a8" data-tamano="0.55">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">01</span>
-                    <h3 class="planeta__nombre">Mercurio</h3>
-                    <p class="planeta__descripcion">Para quienes no le temen al Sol. Aquí un día dura meses y, desde
-                        algunos lugares, el Sol sale dos veces.</p>
-                    <dl class="planeta__datos">
+            <div class="destinos" id="destinos" data-forma="nebulosa" data-opacidad="0" aria-roledescription="carrusel"
+                aria-label="Destinos del sistema solar">
+                <canvas class="destinos__lienzo" aria-hidden="true"></canvas>
+
+                <div class="destinos__lista">
+                <article class="destino" id="mercurio" data-color="#b8b0a8" data-tamano="0.55"
+                    aria-roledescription="diapositiva" aria-label="01 de 07: Mercurio">
+                    <p class="destino__numero"><span>01</span> / 07</p>
+                    <h3 class="destino__nombre">Mercurio</h3>
+                    <p class="destino__descripcion">Para quienes no le temen al Sol. Aquí un día dura meses y, desde algunos lugares, el Sol sale dos veces.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="mercurio">Reservar Mercurio<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>3,7 m/s²</dd>
@@ -111,16 +138,15 @@
                             <dd>USD 180.000</dd>
                         </div>
                     </dl>
-                </div>
-            </article>
+                </article>
 
-            <article class="planeta" id="venus" data-forma="planeta" data-color="#e8c27a" data-tamano="0.75">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">02</span>
-                    <h3 class="planeta__nombre">Venus</h3>
-                    <p class="planeta__descripcion">Nubes ácidas, presión aplastante y un detalle único: aquí el Sol
-                        sale por el oeste. Solo para viajeros de alta resistencia.</p>
-                    <dl class="planeta__datos">
+                <article class="destino" id="venus" data-color="#e8c27a" data-tamano="0.75"
+                    aria-roledescription="diapositiva" aria-label="02 de 07: Venus">
+                    <p class="destino__numero"><span>02</span> / 07</p>
+                    <h3 class="destino__nombre">Venus</h3>
+                    <p class="destino__descripcion">Nubes ácidas, presión aplastante y un detalle único: aquí el Sol sale por el oeste. Solo para viajeros de alta resistencia.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="venus">Reservar Venus<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>8,87 m/s²</dd>
@@ -142,16 +168,15 @@
                             <dd>USD 140.000</dd>
                         </div>
                     </dl>
-                </div>
-            </article>
+                </article>
 
-            <article class="planeta" id="marte" data-forma="planeta" data-color="#d0532c" data-tamano="0.65">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">03</span>
-                    <h3 class="planeta__nombre">Marte</h3>
-                    <p class="planeta__descripcion">El clásico. Volcanes gigantes, cañones infinitos y algo que no
-                        esperas: los atardeceres son azules.</p>
-                    <dl class="planeta__datos">
+                <article class="destino" id="marte" data-color="#d0532c" data-tamano="0.65"
+                    aria-roledescription="diapositiva" aria-label="03 de 07: Marte">
+                    <p class="destino__numero"><span>03</span> / 07</p>
+                    <h3 class="destino__nombre">Marte</h3>
+                    <p class="destino__descripcion">El clásico. Volcanes gigantes, cañones infinitos y algo que no esperas: los atardeceres son azules.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="marte">Reservar Marte<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>3,72 m/s²</dd>
@@ -173,16 +198,15 @@
                             <dd>USD 220.000</dd>
                         </div>
                     </dl>
-                </div>
-            </article>
+                </article>
 
-            <article class="planeta" id="jupiter" data-forma="planeta" data-color="#d9a066" data-tamano="1">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">04</span>
-                    <h3 class="planeta__nombre">Júpiter</h3>
-                    <p class="planeta__descripcion">Observa desde órbita una tormenta más grande que la Tierra que lleva
-                        siglos girando.</p>
-                    <dl class="planeta__datos">
+                <article class="destino" id="jupiter" data-color="#d9a066" data-tamano="1"
+                    aria-roledescription="diapositiva" aria-label="04 de 07: Júpiter">
+                    <p class="destino__numero"><span>04</span> / 07</p>
+                    <h3 class="destino__nombre">Júpiter</h3>
+                    <p class="destino__descripcion">Observa desde órbita una tormenta más grande que la Tierra que lleva siglos girando.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="jupiter">Reservar Júpiter<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>24,79 m/s²</dd>
@@ -204,17 +228,15 @@
                             <dd>USD 640.000</dd>
                         </div>
                     </dl>
-                </div>
-            </article>
+                </article>
 
-            <article class="planeta" id="saturno" data-forma="planeta" data-color="#e3cf8f" data-tamano="0.62"
-                data-anillos="true">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">05</span>
-                    <h3 class="planeta__nombre">Saturno</h3>
-                    <p class="planeta__descripcion">Anillos de hielo y roca que se extienden por más de 270.000 km,
-                        vistos desde primera fila.</p>
-                    <dl class="planeta__datos">
+                <article class="destino" id="saturno" data-color="#e3cf8f" data-tamano="0.62" data-anillos="true"
+                    aria-roledescription="diapositiva" aria-label="05 de 07: Saturno">
+                    <p class="destino__numero"><span>05</span> / 07</p>
+                    <h3 class="destino__nombre">Saturno</h3>
+                    <p class="destino__descripcion">Anillos de hielo y roca que se extienden por más de 270.000 km, vistos desde primera fila.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="saturno">Reservar Saturno<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>10,44 m/s²</dd>
@@ -236,16 +258,15 @@
                             <dd>USD 890.000</dd>
                         </div>
                     </dl>
-                </div>
-            </article>
+                </article>
 
-            <article class="planeta" id="urano" data-forma="planeta" data-color="#8fd3d9" data-tamano="0.8">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">06</span>
-                    <h3 class="planeta__nombre">Urano</h3>
-                    <p class="planeta__descripcion">Un gigante de hielo que gira acostado. Cada una de sus estaciones
-                        dura 21 años.</p>
-                    <dl class="planeta__datos">
+                <article class="destino" id="urano" data-color="#8fd3d9" data-tamano="0.8"
+                    aria-roledescription="diapositiva" aria-label="06 de 07: Urano">
+                    <p class="destino__numero"><span>06</span> / 07</p>
+                    <h3 class="destino__nombre">Urano</h3>
+                    <p class="destino__descripcion">Un gigante de hielo que gira acostado. Cada una de sus estaciones dura 21 años.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="urano">Reservar Urano<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>8,69 m/s²</dd>
@@ -267,16 +288,15 @@
                             <dd>USD 1,4 M</dd>
                         </div>
                     </dl>
-                </div>
-            </article>
+                </article>
 
-            <article class="planeta" id="neptuno" data-forma="planeta" data-color="#4a6cf7" data-tamano="0.8">
-                <div class="planeta__contenido revelar">
-                    <span class="planeta__numero">07</span>
-                    <h3 class="planeta__nombre">Neptuno</h3>
-                    <p class="planeta__descripcion">El destino más lejano. Vientos de más de 2.000 km/h y un azul
-                        profundo que no vas a olvidar.</p>
-                    <dl class="planeta__datos">
+                <article class="destino" id="neptuno" data-color="#4a6cf7" data-tamano="0.8"
+                    aria-roledescription="diapositiva" aria-label="07 de 07: Neptuno">
+                    <p class="destino__numero"><span>07</span> / 07</p>
+                    <h3 class="destino__nombre">Neptuno</h3>
+                    <p class="destino__descripcion">El destino más lejano. Vientos de más de 2.000 km/h y un azul profundo que no vas a olvidar.</p>
+                    <a href="#reserva" class="destino__reservar" data-destino="neptuno">Reservar Neptuno<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                    <dl class="destino__datos">
                         <div>
                             <dt>Gravedad</dt>
                             <dd>11,15 m/s²</dd>
@@ -298,12 +318,59 @@
                             <dd>USD 2,1 M</dd>
                         </div>
                     </dl>
+                </article>
                 </div>
-            </article>
+
+                <div class="destinos__controles">
+                    <button type="button" class="destinos__boton destinos__boton--anterior" aria-label="Destino anterior">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+                    </button>
+                    <button type="button" class="destinos__boton destinos__boton--siguiente" aria-label="Siguiente destino">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="ruta" id="ruta" data-forma="nebulosa" data-opacidad="0">
+            <div class="ruta__escena">
+                <canvas class="ruta__lienzo" aria-hidden="true"></canvas>
+                <h2 class="titulo ruta__titulo revelar">La ruta<br><em>De la Tierra a <span class="ruta__destino">Mercurio</span> en <span class="ruta__duracion">52 días</span></em></h2>
+
+                <ol class="ruta__etapas">
+                    <li class="ruta__etapa">
+                        <h3 class="ruta__nombre">Entrenamiento</h3>
+                        <p class="ruta__tiempo">3 semanas</p>
+                        <p class="ruta__texto">Te preparas en el centro APSIS de Atacama: gravedad cero, traje a medida y simulador de vuelo.</p>
+                    </li>
+                    <li class="ruta__etapa">
+                        <h3 class="ruta__nombre">Despegue</h3>
+                        <p class="ruta__tiempo">Día 1</p>
+                        <p class="ruta__texto">Subes a la plataforma orbital y la APSIS I enciende motores rumbo a <span class="ruta__destino">Mercurio</span>.</p>
+                    </li>
+                    <li class="ruta__etapa">
+                        <h3 class="ruta__nombre">Crucero</h3>
+                        <p class="ruta__tiempo"><span class="ruta__duracion">52 días</span></p>
+                        <p class="ruta__texto">Viajas con gravedad artificial, cabina panorámica y criosueño opcional para los trayectos largos.</p>
+                    </li>
+                    <li class="ruta__etapa">
+                        <h3 class="ruta__nombre">Llegada</h3>
+                        <p class="ruta__tiempo">2 semanas</p>
+                        <p class="ruta__texto">Entramos en la órbita de <span class="ruta__destino">Mercurio</span> y comienzan las excursiones guiadas.</p>
+                    </li>
+                    <li class="ruta__etapa">
+                        <h3 class="ruta__nombre">Regreso</h3>
+                        <p class="ruta__tiempo">Mismo trayecto</p>
+                        <p class="ruta__texto">La APSIS I te trae de vuelta a la Tierra con tu pase de abordaje sellado.</p>
+                    </li>
+                </ol>
+            </div>
         </section>
 
         <section class="nave" id="nave" data-forma="nave" data-ancla=".nave__imagen">
-            <h2 class="nave__titulo revelar">La nave<br><em>APSIS I</em></h2>
+            <h2 class="titulo nave__titulo revelar">La nave<br><em>APSIS I</em></h2>
 
             <div class="nave__visual">
                 <figure class="nave__imagen" data-parallax="0.15">
@@ -327,32 +394,35 @@
             </ul>
         </section>
 
-        <section class="faq" id="faq" data-forma="nebulosa">
-            <h2 class="faq__titulo revelar">Preguntas<br><em>frecuentes</em></h2>
 
-            <div class="faq__lista">
-                <details class="faq__item revelar" name="faq">
-                    <summary>¿Qué incluye el equipaje permitido?</summary>
-                    <p>Cada pasajero tiene derecho a un traje espacial a medida, un módulo de pertenencias de 15kg y un
-                        kit de supervivencia interplanetaria suministrado por APSIS.</p>
-                </details>
+        <section class="astronauta" id="astronauta" data-forma="nebulosa" data-opacidad="0" data-ancla=".astronauta__nube">
+            <div class="astronauta__escena">
+                <div class="astronauta__luz" aria-hidden="true"></div>
+                <img class="astronauta__tierra" src="assets/img/tierra.webp" alt="" aria-hidden="true"
+                    width="1920" height="1020" decoding="async">
+                <img class="astronauta__figura" src="assets/img/astronauta.webp"
+                    alt="Astronauta con mochila propulsora flotando libre en el espacio, sobre la Tierra"
+                    width="980" height="1110" decoding="async">
+                <canvas class="astronauta__3d" aria-hidden="true"></canvas>
 
-                <details class="faq__item revelar" name="faq">
-                    <summary>¿Es seguro el criosueño para viajes largos?</summary>
-                    <p>Totalmente. Nuestro sistema supervisado por IA monitorea constantemente tus signos vitales,
-                        garantizando un despertar suave y sin efectos secundarios al llegar a tu destino.</p>
-                </details>
-
-                <details class="faq__item revelar" name="faq">
-                    <summary>¿Qué ocurre si hay una tormenta solar?</summary>
-                    <p>La nave APSIS I está equipada con un escudo magnético deflector. En caso de actividad solar
-                        intensa, los escudos se activan automáticamente para proteger a los pasajeros.</p>
-                </details>
+                <div class="astronauta__texto">
+                    <h2 class="titulo astronauta__titulo">El próximo<br><em>eres tú</em></h2>
+                    <p class="astronauta__descripcion">En 1984, Bruce McCandless flotó sin cuerda a casi 100 metros de
+                        su nave: el primer paseo espacial completamente libre. Más de cuarenta años después, el
+                        siguiente lugar es tuyo.</p>
+                    <a href="#reserva" class="boton-pill boton-pill--lleno">Reservar mi lugar</a>
+                    <p class="astronauta__ayuda">
+                        <span class="solo-puntero">Arrastra para girar al astronauta</span>
+                        <span class="solo-tactil">Desliza de lado para girar al astronauta</span>
+                    </p>
+                </div>
+                <div class="astronauta__nube" aria-hidden="true"></div>
+                <div class="astronauta__sombra" aria-hidden="true"></div>
             </div>
         </section>
 
         <section class="reserva" id="reserva" data-forma="nebulosa" data-opacidad="0.35">
-            <h2 class="reserva__titulo revelar">Reserva<br><em>tu viaje</em></h2>
+            <h2 class="titulo reserva__titulo revelar" id="reserva-titulo">Reserva<br><em>tu viaje</em></h2>
 
             <form class="reserva__form revelar" id="form-reserva">
                 <label for="destino">Destino</label>
@@ -372,52 +442,44 @@
                 <label for="fecha">Fecha de despegue</label>
                 <input type="date" id="fecha" name="fecha" required>
 
-                <button type="submit" class="boton-pill boton-pill--lleno">Generar pase de abordaje</button>
+                <button type="submit" class="boton-accion reserva__enviar"><span class="boton-accion__circulo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>Generar pase de abordaje</button>
             </form>
 
-            <div class="pase-escena revelar" id="pase-escena">
+            <div class="reserva__visual revelar">
+                <div class="reserva__planeta" aria-hidden="true">
+                    <canvas class="reserva__lienzo"></canvas>
+                </div>
                 <div class="pase" id="pase" aria-live="polite">
-                    <div class="pase__cabecera">
-                        <span class="pase__marca"><img src="assets/logo.svg" alt="" width="22" height="22">APSIS</span>
-                        <span>Pase de abordaje</span>
-                    </div>
-                    <dl class="pase__cuerpo">
-                        <div>
+                    <p class="pase__destino" id="pase-destino">Marte</p>
+                    <dl class="pase__datos">
+                        <div style="--i: 1">
                             <dt>Pasajero</dt>
                             <dd id="pase-nombre">—</dd>
                         </div>
-                        <div>
+                        <div style="--i: 2">
                             <dt>Vuelo</dt>
                             <dd id="pase-vuelo">—</dd>
                         </div>
-                        <div>
-                            <dt>Destino</dt>
-                            <dd id="pase-destino">—</dd>
-                        </div>
-                        <div>
+                        <div style="--i: 3">
                             <dt>Despegue</dt>
                             <dd id="pase-fecha">—</dd>
                         </div>
-                        <div>
+                        <div style="--i: 4">
                             <dt>Puerta</dt>
                             <dd id="pase-puerta">—</dd>
                         </div>
-                        <div>
+                        <div style="--i: 5">
                             <dt>Asiento</dt>
                             <dd id="pase-asiento">—</dd>
                         </div>
                     </dl>
-                    <div class="pase__codigo" aria-hidden="true"></div>
+                    <p class="pase__estado" style="--i: 6">Pase de abordaje sin emitir</p>
                 </div>
-                <p class="pase-escena__ayuda">
-                    <span class="solo-puntero">Mueve el cursor sobre el pase</span>
-                    <span class="solo-tactil">Toca o desliza el pase hacia los lados</span>
-                </p>
             </div>
         </section>
 
         <a href="#inicio" class="boton-subir" id="boton-subir" aria-label="Volver al inicio">
-            ↑
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
         </a>
 
     </main>
@@ -427,6 +489,7 @@
 
     <footer class="footer">
         <p>APSIS © 2026 · Taller 1 de Introducción al Desarrollo Web/Móvil · UCN</p>
+        <p>Equipo: Roger Villarroel · Paulo Araya · Gian Guzman · Miguel Valenzuela</p>
         <p>Empresa ficticia. Duraciones y precios inventados; datos planetarios de la NASA.</p>
     </footer>
 

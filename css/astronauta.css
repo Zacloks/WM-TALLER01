@@ -1,0 +1,174 @@
+.astronauta {
+	position: relative;
+	height: 200vh;
+	height: 200svh;
+}
+
+.astronauta__escena {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	height: 100svh;
+	overflow: hidden;
+	perspective: 1200px;
+}
+
+.astronauta__escena::after {
+	content: "";
+	position: absolute;
+	inset: auto 0 0;
+	z-index: 2;
+	height: 28%;
+	background: linear-gradient(to top, var(--bg), transparent);
+	pointer-events: none;
+}
+
+.astronauta__luz {
+	position: absolute;
+	top: -45vmax;
+	left: -35vmax;
+	width: 110vmax;
+	height: 110vmax;
+	background: radial-gradient(circle, rgba(238, 242, 248, 0.14), transparent 60%);
+	pointer-events: none;
+	will-change: transform, opacity;
+}
+
+.astronauta__tierra {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: max(140%, 1100px);
+	max-width: none;
+	height: auto;
+	translate: -50% 0;
+	transform-origin: 50% 14.7%;
+	will-change: transform;
+}
+
+.astronauta__figura {
+	position: absolute;
+	top: 16%;
+	left: 54%;
+	width: clamp(240px, 30vw, 500px);
+	height: auto;
+	transform-origin: 50% 50%;
+	will-change: transform;
+}
+
+.astronauta__3d {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: grab;
+	touch-action: pan-y;
+	mask-image: linear-gradient(to bottom, transparent, #000 22%);
+	transition: opacity 0.8s ease;
+}
+
+.astronauta__3d.arrastrando {
+	cursor: grabbing;
+}
+
+.astronauta--3d .astronauta__3d {
+	opacity: 1;
+}
+
+.astronauta--3d .astronauta__escena::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	background: linear-gradient(90deg, rgba(5, 5, 7, 0.55), transparent 55%);
+	pointer-events: none;
+}
+
+.astronauta--3d .astronauta__figura,
+.astronauta--3d .astronauta__tierra,
+.astronauta--3d .astronauta__luz {
+	visibility: hidden;
+}
+
+.astronauta__ayuda {
+	display: none;
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.astronauta--3d .astronauta__ayuda {
+	display: block;
+}
+
+.astronauta__texto {
+	position: absolute;
+	top: clamp(5.5rem, 16vh, 9rem);
+	left: var(--margen);
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1.5rem;
+	max-width: min(48rem, 58vw);
+}
+
+.astronauta__descripcion {
+	max-width: 30rem;
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-medio);
+	line-height: 1.6;
+}
+
+
+.astronauta__nube {
+	position: absolute;
+	top: 4%;
+	left: 50%;
+	width: min(36vw, 26rem);
+	aspect-ratio: 1;
+	translate: -50% 0;
+	pointer-events: none;
+}
+
+.astronauta__sombra {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+	background: var(--bg);
+	opacity: 0;
+	pointer-events: none;
+}
+
+@media (max-width: 768px) {
+	.astronauta__escena::after {
+		height: 50%;
+	}
+
+	.astronauta__texto {
+		top: 5.5rem;
+		right: var(--margen);
+		gap: 1rem;
+		max-width: none;
+	}
+
+	.astronauta__descripcion {
+		font-size: var(--texto-base);
+	}
+
+	.astronauta__figura {
+		top: auto;
+		bottom: 22%;
+		left: 50%;
+		width: 58vw;
+		translate: -50% 0;
+	}
+
+	.astronauta__tierra {
+		width: 260%;
+	}
+
+}

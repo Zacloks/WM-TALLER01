@@ -3,7 +3,7 @@
 	const ctx = canvas.getContext("2d");
 	const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-	const CANTIDAD = window.innerWidth < 768 ? 1200 : 2500;
+	const CANTIDAD = window.innerWidth <= 768 ? 1200 : 2500;
 	const ANGULO_DORADO = Math.PI * (3 - Math.sqrt(5));
 	const DISTANCIA_CAMARA = 4;
 	const DISTANCIA_CAMARA_NAVE = 6;
@@ -13,6 +13,14 @@
 	const VELOCIDAD_ESCAPE = 0.0006;
 	const SENSIBILIDAD = 0.008;
 	const IDENTIDAD = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+	const ORBITAS = [0.34, 0.46, 0.6, 0.76, 1.08, 1.36, 1.64, 1.9];
+	const TAMANOS = [0.025, 0.04, 0.042, 0.032, 0.09, 0.075, 0.055, 0.055];
+	const FASES = [0.4, 2.1, 3.6, 5.2, 1.3, 4.4, 2.9, 0.9];
+	const TIERRA = 2;
+	const SATURNO = 5;
+	const DESTINOS = [3, 4, 5, 6, 7, 0, 1];
+	const VELOCIDAD_ORBITA = 0.00012;
+	const DURACION_VIAJE = 9000;
 
 	let ancho = 0;
 	let alto = 0;
@@ -103,6 +111,87 @@
 		return n;
 	}
 
+	function elegirPonderado(pesos) {
+		const total = pesos.reduce((suma, peso) => suma + peso, 0);
+		let azar = Math.random() * total;
+		for (let i = 0; i < pesos.length; i++) {
+			azar -= pesos[i];
+			if (azar <= 0) return i;
+		}
+		return pesos.length - 1;
+	}
+
+	function puntoEsfera(radio) {
+		const a = Math.random() * Math.PI * 2;
+		const b = Math.acos(2 * Math.random() - 1);
+		const r = Math.cbrt(Math.random()) * radio;
+		return {
+			x: Math.sin(b) * Math.cos(a) * r,
+			y: Math.cos(b) * r,
+			z: Math.sin(b) * Math.sin(a) * r,
+		};
+	}
+
+	function crearPuntoSistema(u) {
+		if (u < 0.1) return puntoEsfera(0.13); // Sol
+
+		if (u < 0.5) {
+			// polvo que dibuja las órbitas
+			const a = Math.random() * Math.PI * 2;
+			const r = ORBITAS[elegirPonderado(ORBITAS)] + (Math.random() - 0.5) * 0.012;
+			return { x: Math.cos(a) * r, y: 0, z: Math.sin(a) * r, brillo: 0.45 };
+		}
+
+		if (u < 0.86) {
+			const planeta = elegirPonderado(TAMANOS);
+			const tamano = TAMANOS[planeta];
+			if (planeta === SATURNO && Math.random() < 0.4) {
+				const a = Math.random() * Math.PI * 2;
+				const r = tamano * (1.6 + Math.random() * 0.7);
+				return { planeta, dx: Math.cos(a) * r, dy: 0, dz: Math.sin(a) * r };
+			}
+			const p = puntoEsfera(tamano);
+			return { planeta, dx: p.x, dy: p.y, dz: p.z };
+		}
+
+		return { estela: true, retraso: Math.random(), vuelta: -1 };
+	}
+
+	function anguloPlaneta(planeta, tiempo) {
+		return FASES[planeta] + tiempo * VELOCIDAD_ORBITA * Math.pow(ORBITAS[TIERRA] / ORBITAS[planeta], 1.5);
+	}
+
+	function puntoSistema(s, tiempo) {
+		if (s.planeta !== undefined) {
+			const a = anguloPlaneta(s.planeta, tiempo);
+			const r = ORBITAS[s.planeta];
+			return { x: Math.cos(a) * r + s.dx, y: s.dy, z: Math.sin(a) * r + s.dz };
+		}
+		if (!s.estela) return s;
+
+		const ciclo = tiempo / DURACION_VIAJE;
+		const vuelta = Math.floor(ciclo);
+		const avance = ciclo - vuelta - s.retraso * 0.16;
+		const reinicio = vuelta !== s.vuelta || avance < 0;
+		s.vuelta = vuelta;
+
+		const destino = DESTINOS[vuelta % DESTINOS.length];
+		const salida = anguloPlaneta(TIERRA, vuelta * DURACION_VIAJE);
+		const llegada = anguloPlaneta(destino, (vuelta + 1) * DURACION_VIAJE);
+		const recorrido = ((llegada - salida) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) || Math.PI * 2;
+		const t = Math.max(0, avance);
+		const a = salida + recorrido * t;
+		const r = ORBITAS[TIERRA] + (ORBITAS[destino] - ORBITAS[TIERRA]) * (1 - Math.cos(Math.PI * t)) / 2;
+
+		return {
+			x: Math.cos(a) * r,
+			y: 0,
+			z: Math.sin(a) * r,
+			brillo: avance < 0 ? 0 : (1 - s.retraso) * Math.sin(Math.PI * t),
+			reinicio,
+		};
+	}
+
 	function multiplicar(a, b) {
 		const r = [];
 		for (let i = 0; i < 3; i++) {
@@ -177,6 +266,7 @@
 			anillo,
 			nebulosa,
 			nave: crearPuntoNave(),
+			sistema: crearPuntoSistema(i / CANTIDAD),
 			enAnillo: i % 3 === 0,
 			x: Math.random() * window.innerWidth,
 			y: Math.random() * window.innerHeight,
@@ -209,6 +299,7 @@
 			objetivo.opacidad = parseFloat(datos.opacidad || 1);
 			objetivo.ancla = datos.ancla ? document.querySelector(datos.ancla) : null;
 			if (datos.forma === "nebulosa") objetivo.inclinacion = 1.1;
+			else if (datos.forma === "sistema") objetivo.inclinacion = 1.15;
 			else if (datos.forma === "nave") objetivo.inclinacion = 0.3;
 			else objetivo.inclinacion = objetivo.anillos ? 0.45 : 0.35;
 
@@ -231,7 +322,12 @@
 		if (objetivo.forma === "nebulosa") {
 			return { x: ancho * 0.5, y: alto * 0.45, escala: base * 0.32 };
 		}
-		if (ancho < 768) {
+		if (objetivo.forma === "sistema") {
+			return ancho <= 768
+				? { x: ancho * 0.5, y: alto * 0.3, escala: base * 0.24 }
+				: { x: ancho * 0.5, y: alto * 0.29, escala: base * 0.29 };
+		}
+		if (ancho <= 768) {
 			return {
 				x: ancho * 0.5,
 				y: alto * 0.21,
@@ -267,7 +363,8 @@
 			arrastre.activo || Math.hypot(arrastre.vx, arrastre.vy) > 0.05;
 
 		const esNave = objetivo.forma === "nave";
-		const giro = esNave ? 0.75 + Math.sin(tiempo * 0.0004) * 0.2 : angulo;
+		const esSistema = objetivo.forma === "sistema";
+		const giro = esNave ? 0.75 + Math.sin(tiempo * 0.0004) * 0.2 : esSistema ? 0.4 : angulo;
 		const cosA = Math.cos(giro);
 		const sinA = Math.sin(giro);
 		const cosI = Math.cos(inclinacion);
@@ -283,6 +380,7 @@
 			let punto;
 			if (objetivo.forma === "nebulosa") punto = p.nebulosa;
 			else if (objetivo.forma === "nave") punto = puntoNave(p.nave, tiempo);
+			else if (esSistema) punto = puntoSistema(p.sistema, tiempo);
 			else if (objetivo.anillos && p.enAnillo) punto = p.anillo;
 			else punto = p.esfera;
 

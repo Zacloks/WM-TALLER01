@@ -1,0 +1,313 @@
+.viaje__intro {
+	min-height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1.5rem;
+	padding: 6rem var(--margen);
+}
+
+.viaje__texto {
+	font-family: var(--fuente-subtexto);
+	max-width: 33rem;
+	color: var(--tenue);
+	font-size: var(--texto-medio);
+}
+
+.destinos {
+	--destino: var(--texto);
+	position: relative;
+}
+
+.destinos__lienzo {
+	display: none;
+}
+
+.destino {
+	display: grid;
+	gap: 1rem;
+	padding: 4rem var(--margen);
+}
+
+.destino__numero {
+	color: var(--tenue);
+	font-family: var(--fuente-subtexto);
+	font-size: var(--texto-meta);
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.1em;
+}
+
+.destino__numero span {
+	color: var(--destino);
+}
+
+.destino__nombre {
+	font-size: var(--texto-grande);
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: var(--espaciado);
+	text-transform: uppercase;
+}
+
+.destino__nombre .letra {
+	display: inline-block;
+}
+
+.destino__descripcion {
+	max-width: 24rem;
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-base);
+	line-height: 1.6;
+}
+
+.destino__datos {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, auto));
+	gap: 0.9rem 2.5rem;
+	max-width: 26rem;
+	font-family: var(--fuente-subtexto);
+}
+
+.destino__datos dt {
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.destino__datos dd {
+	font-size: var(--texto-medio);
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+}
+
+.destino__reservar {
+	display: inline-flex;
+	align-items: center;
+	justify-self: start;
+	gap: 0.6rem;
+	color: var(--destino);
+	font-size: var(--texto-base);
+	font-weight: 500;
+	transition: transform 0.16s ease-out;
+}
+
+.destino__reservar svg {
+	width: 1.1em;
+	height: 1.1em;
+	transition: translate 0.3s var(--curva);
+}
+
+.destino__reservar:active {
+	transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.destino__reservar:hover svg {
+		translate: 3px 0;
+	}
+}
+
+.destinos__controles {
+	display: none;
+}
+
+.destinos--carrusel {
+	height: 100vh;
+	height: 100svh;
+	min-height: 600px;
+	overflow: hidden;
+	touch-action: pan-y;
+}
+
+.destinos--carrusel .destinos__lienzo {
+	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.destinos--carrusel .destino {
+	position: absolute;
+	inset: 0;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto 1fr auto auto;
+	grid-template-areas:
+		"numero nombre"
+		". ."
+		". ."
+		"datos descripcion"
+		"datos accion";
+	gap: 1rem var(--margen);
+	padding: 6.5rem var(--margen) 3rem;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.destinos--carrusel .destino.activo {
+	visibility: visible;
+}
+
+.destinos--carrusel .destino.activo > * {
+	pointer-events: auto;
+}
+
+.destinos--carrusel .destino__numero {
+	grid-area: numero;
+}
+
+.destinos--carrusel .destino__nombre {
+	grid-area: nombre;
+	justify-self: end;
+	margin-right: -0.28em;
+	text-align: right;
+}
+
+.destinos--carrusel .destino__datos {
+	grid-area: datos;
+	align-self: end;
+}
+
+.destinos--carrusel .destino__descripcion {
+	grid-area: descripcion;
+	justify-self: end;
+	align-self: end;
+	width: min(100%, 24rem);
+}
+
+.destinos--carrusel .destino__reservar {
+	grid-area: accion;
+	justify-self: end;
+	width: min(100%, 24rem);
+}
+
+.destinos--carrusel .destinos__controles {
+	position: absolute;
+	top: 50%;
+	right: var(--margen);
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	translate: 0 -50%;
+}
+
+.destinos__boton {
+	display: grid;
+	place-items: center;
+	border: 1px solid var(--linea);
+	border-radius: 50%;
+	background: transparent;
+	color: var(--texto);
+	cursor: pointer;
+	transition:
+		background 0.25s ease,
+		border-color 0.25s ease,
+		transform 0.16s ease-out;
+}
+
+.destinos__boton svg {
+	width: 40%;
+	height: 40%;
+	transition: translate 0.3s var(--curva);
+}
+
+.destinos__boton--anterior {
+	width: 3.25rem;
+	height: 3.25rem;
+}
+
+.destinos__boton--siguiente {
+	width: 6.5rem;
+	height: 6.5rem;
+	border-color: var(--destino);
+	background: var(--destino);
+	color: var(--bg);
+}
+
+.destinos__boton:active {
+	transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.destinos__boton--anterior:hover {
+		border-color: var(--texto);
+	}
+
+	.destinos__boton--siguiente:hover svg {
+		translate: 3px 0;
+	}
+}
+
+.destinos--carrusel .destino.activo .destino__nombre .letra {
+	animation: aparecer-letra 0.8s var(--curva) both;
+	animation-delay: calc(0.25s + var(--i) * 45ms);
+}
+
+.destinos--carrusel .destino.activo .destino__numero,
+.destinos--carrusel .destino.activo .destino__datos,
+.destinos--carrusel .destino.activo .destino__descripcion,
+.destinos--carrusel .destino.activo .destino__reservar {
+	animation: aparecer 0.7s var(--curva) both;
+}
+
+.destinos--carrusel .destino.activo .destino__numero { animation-delay: 0.2s; }
+.destinos--carrusel .destino.activo .destino__datos { animation-delay: 0.45s; }
+.destinos--carrusel .destino.activo .destino__descripcion { animation-delay: 0.55s; }
+.destinos--carrusel .destino.activo .destino__reservar { animation-delay: 0.62s; }
+
+@media (max-width: 768px) {
+	.destinos--carrusel .destino {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto 1fr auto auto auto;
+		grid-template-areas:
+			"numero"
+			"nombre"
+			"."
+			"descripcion"
+			"accion"
+			"datos";
+		gap: 0.75rem;
+		padding: 5.5rem var(--margen) 6.5rem;
+	}
+
+	.destinos--carrusel .destino__nombre {
+		justify-self: start;
+		margin-right: 0;
+		font-size: clamp(2rem, 10vw, 3rem);
+		letter-spacing: 0.2em;
+		text-align: left;
+	}
+
+	.destinos--carrusel .destino__descripcion,
+	.destinos--carrusel .destino__reservar {
+		justify-self: start;
+	}
+
+	.destino__datos {
+		gap: 0.6rem 1.5rem;
+	}
+
+	.destino__datos dd {
+		font-size: var(--texto-base);
+	}
+
+	.destinos--carrusel .destinos__controles {
+		top: auto;
+		bottom: 1.25rem;
+		right: auto;
+		left: var(--margen);
+		flex-direction: row-reverse;
+		translate: none;
+	}
+
+	.destinos__boton--siguiente {
+		width: 4.5rem;
+		height: 4.5rem;
+	}
+
+	.destinos__boton--anterior {
+		width: 3rem;
+		height: 3rem;
+	}
+}

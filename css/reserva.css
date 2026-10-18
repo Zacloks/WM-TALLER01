@@ -1,0 +1,280 @@
+.reserva {
+	--destino: var(--texto);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas:
+		"titulo visual"
+		"formulario visual";
+	gap: 3.5rem var(--margen);
+	padding: 8rem var(--margen);
+	overflow-x: clip;
+}
+
+.reserva__titulo {
+	grid-area: titulo;
+}
+
+.reserva__cerrar {
+	display: none;
+}
+
+.reserva--pantalla {
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	align-content: center;
+	padding-block: 6.5rem 4rem;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	background: var(--bg);
+	clip-path: circle(0 at var(--origen-x, 50%) var(--origen-y, 50%));
+	transition: clip-path 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.reserva--pantalla.abierta {
+	clip-path: circle(150% at var(--origen-x, 50%) var(--origen-y, 50%));
+	transition: clip-path 0.7s var(--curva);
+}
+
+.reserva--pantalla[hidden] {
+	display: none;
+}
+
+.reserva-abierta .reserva--pantalla {
+	background: transparent;
+	transition:
+		clip-path 0.7s var(--curva),
+		background-color 0.4s ease;
+}
+
+.reserva-abierta .header,
+.reserva-abierta main,
+.reserva-abierta .footer {
+	display: none;
+}
+
+.reserva--pantalla .reserva__cerrar {
+	position: fixed;
+	top: 1.25rem;
+	right: var(--margen);
+	z-index: 2;
+	display: grid;
+	place-items: center;
+	width: 3.25rem;
+	height: 3.25rem;
+	border: 1px solid var(--linea);
+	border-radius: 50%;
+	background: var(--bg);
+	color: var(--texto);
+	cursor: pointer;
+	transition:
+		transform 0.16s ease-out,
+		background 0.25s ease,
+		border-color 0.25s ease,
+		color 0.25s ease;
+}
+
+.reserva__cerrar svg {
+	width: 40%;
+	height: 40%;
+}
+
+.reserva__cerrar:active {
+	transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.reserva__cerrar:hover {
+		border-color: var(--texto);
+		background: var(--texto);
+		color: var(--bg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reserva--pantalla {
+		clip-path: none;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+
+	.reserva--pantalla.abierta {
+		clip-path: none;
+		opacity: 1;
+	}
+}
+
+.reserva__form {
+	grid-area: formulario;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	align-items: baseline;
+	gap: 0 2rem;
+	max-width: 34rem;
+}
+
+.reserva__form label {
+	padding-top: 1.25rem;
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.reserva__form input,
+.reserva__form select {
+	width: 100%;
+	padding: 1.25rem 0 0.75rem;
+	border: none;
+	border-bottom: 1px solid var(--linea);
+	border-radius: 0;
+	background: transparent;
+	color: var(--texto);
+	font: inherit;
+	font-size: var(--texto-medio);
+	color-scheme: dark;
+	transition: border-color 0.25s ease;
+}
+
+.reserva__form input::placeholder {
+	color: rgba(242, 242, 242, 0.5);
+}
+
+.reserva__form input:focus-visible,
+.reserva__form select:focus-visible {
+	outline: none;
+	border-bottom-color: var(--destino);
+}
+
+.reserva__form option {
+	background: var(--bg);
+}
+
+.reserva__enviar {
+	grid-column: 1 / -1;
+	justify-self: start;
+	margin-top: 2.75rem;
+}
+
+.reserva__visual {
+	grid-area: visual;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.reserva__planeta {
+	position: relative;
+	width: min(100%, 24rem);
+	aspect-ratio: 1;
+}
+
+.reserva__lienzo {
+	position: absolute;
+	top: -40%;
+	left: -40%;
+	width: 180%;
+	height: 180%;
+	pointer-events: none;
+}
+
+.pase {
+	display: grid;
+	justify-items: center;
+	gap: 1.25rem;
+	width: min(100%, 26rem);
+	text-align: center;
+}
+
+.pase__estado {
+	font-family: var(--fuente-subtexto);
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.pase__destino {
+	padding-left: var(--espaciado);
+	font-size: var(--texto-titulo);
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: var(--espaciado);
+	text-transform: uppercase;
+}
+
+.pase__destino .letra {
+	display: inline-block;
+}
+
+.pase__destino.cambio .letra {
+	animation: aparecer-letra 0.8s var(--curva) both;
+	animation-delay: calc(var(--i) * 40ms);
+}
+
+.pase__datos {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem 2rem;
+	width: 100%;
+	margin-block: 0.5rem;
+	font-family: var(--fuente-subtexto);
+}
+
+.pase__datos div:first-child {
+	grid-column: 1 / -1;
+}
+
+.pase__datos dt {
+	color: var(--tenue);
+	font-size: var(--texto-meta);
+}
+
+.pase__datos dd {
+	font-size: var(--texto-medio);
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+	overflow-wrap: anywhere;
+}
+
+.pase.emitido .pase__estado,
+.pase.emitido dd {
+	animation: aparecer 0.6s var(--curva) both;
+	animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+@media (max-width: 768px) {
+	.reserva {
+		grid-template-columns: 1fr;
+		grid-template-rows: none;
+		grid-template-areas:
+			"titulo"
+			"visual"
+			"formulario";
+		gap: 2.5rem;
+		padding: 6rem var(--margen);
+	}
+
+	.reserva--pantalla {
+		align-content: start;
+		padding-block: 5.5rem 3rem;
+	}
+
+	.reserva__form {
+		grid-template-columns: 1fr;
+		max-width: none;
+	}
+
+	.reserva__form label {
+		padding-top: 1.5rem;
+	}
+
+	.reserva__form input,
+	.reserva__form select {
+		padding-top: 0.5rem;
+	}
+
+	.reserva__planeta {
+		width: min(78%, 20rem);
+	}
+}
